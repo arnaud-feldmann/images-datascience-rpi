@@ -178,6 +178,7 @@ jobs:
         with:
           load: true
           push: false
+          platforms: linux/arm64
           context: ${{ inputs.context }}
           tags: ${{ steps.generate-image-names.outputs.tags }}
           build-args: |
