@@ -13,7 +13,6 @@ jobs:
       context: base
       test: true
       base_image: ubuntu:22.04
-      base_image_gpu: nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
       external_base_image: true
       branch: ${{ github.ref }}
     secrets:
@@ -41,21 +40,6 @@ jobs:
     with:
       image: python-datascience
       context: python-datascience
-      test: true
-      base_image: python-minimal
-      python_version_1: 3.11.6
-      python_version_2: 3.10.13
-      branch: ${{ github.ref }}
-    secrets:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-  python-tensorflow:
-    needs: [python-minimal]
-    uses: ./.github/workflows/main-workflow-template.yml
-    with:
-      image: python-tensorflow
-      context: python-tensorflow
       test: true
       base_image: python-minimal
       python_version_1: 3.11.6
@@ -103,21 +87,6 @@ jobs:
       context: jupyter
       test: true
       base_image: python-datascience
-      python_version_1: 3.11.6
-      python_version_2: 3.10.13
-      branch: ${{ github.ref }}
-    secrets:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-  jupyter-tensorflow:
-    needs: [python-tensorflow]
-    uses: ./.github/workflows/main-workflow-template.yml
-    with:
-      image: jupyter-tensorflow
-      context: jupyter
-      test: true
-      base_image: python-tensorflow
       python_version_1: 3.11.6
       python_version_2: 3.10.13
       branch: ${{ github.ref }}
